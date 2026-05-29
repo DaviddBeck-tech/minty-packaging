@@ -72,17 +72,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ly Giấy Tô Giấy — Xưởng in bao bì giấy & nhựa" },
-      { name: "description", content: "Xưởng sản xuất ly giấy, tô giấy, ly nhựa PET, hộp giấy. In logo theo yêu cầu, giao hàng toàn quốc." },
-      { property: "og:title", content: "Ly Giấy Tô Giấy — Xưởng in bao bì" },
-      { property: "og:description", content: "Sản xuất tại xưởng, giá tốt, in logo theo yêu cầu." },
+      { title: "Jack -- 3D Creator" },
+      { name: "description", content: "Jack's portfolio landing page - 3D Creator driven by crafting striking and unforgettable projects" },
+      { property: "og:title", content: "Jack -- 3D Creator" },
+      { property: "og:description", content: "Jack's portfolio landing page - 3D Creator" },
       { property: "og:type", content: "website" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Anton&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800;900&display=swap" },
     ],
   }),
 

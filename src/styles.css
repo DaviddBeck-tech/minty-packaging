@@ -43,44 +43,42 @@
   --color-slate-500: #64748b;
   --color-slate-600: #475569;
   --color-slate-900: #0f172a;
-  --font-display: "Anton", sans-serif;
-  --font-sans: "Be Vietnam Pro", sans-serif;
+  --font-sans: "Kanit", sans-serif;
 }
 
 :root {
   --radius: 0.75rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.18 0.04 250);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.18 0.04 250);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.18 0.04 250);
-  --primary: oklch(0.58 0.11 180);
-  --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.97 0.01 240);
-  --secondary-foreground: oklch(0.2 0.04 250);
-  --muted: oklch(0.97 0.01 240);
-  --muted-foreground: oklch(0.5 0.03 250);
-  --accent: oklch(0.93 0.06 175);
-  --accent-foreground: oklch(0.3 0.08 180);
-  --destructive: oklch(0.6 0.24 27);
-  --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.01 250);
-  --input: oklch(0.92 0.01 250);
-  --ring: oklch(0.58 0.11 180);
+  --background: #0C0C0C;
+  --foreground: #D7E2EA;
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; font-family: "Be Vietnam Pro", sans-serif; }
-  body { background-color: var(--color-background); color: var(--color-foreground); }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    border-color: rgba(215, 226, 234, 0.15);
+  }
+  html, body, #root {
+    background-color: #0C0C0C !important;
+    color: #D7E2EA;
+    font-family: "Kanit", sans-serif;
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
   ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f8fafc; }
-  ::-webkit-scrollbar-thumb { background: #0d9488; border-radius: 3px; }
+  ::-webkit-scrollbar-track { background: #0C0C0C; }
+  ::-webkit-scrollbar-thumb { background: #BBCCD7; border-radius: 3px; }
 }
 
 @layer utilities {
-  .font-display { font-family: "Anton", sans-serif; }
+  .hero-heading {
+    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
   .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 }

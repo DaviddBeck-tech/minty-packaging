@@ -3,32 +3,46 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const PRODUCTS = [
   {
-    src: "https://drive.google.com/uc?export=view&id=1W6FCKNy2lvdqIwmUV9m-rJbZleaBgjZ0",
-    bg: "#0D9488",
-    label: "Ly Giấy",
-    sub: "In logo theo yêu cầu",
+    src: "https://lh3.googleusercontent.com/d/1nL9lLF0Thz78hGmY0PYKoJM7WFiq636_",
+    bg: "#0D3A2B", // Deep Forest Green to match the Nº6 Drink & Gelato green cup
+    label: "Ly Giấy Nº6",
+    sub: "In logo trà sữa, kem, gelato",
     emoji: "🥤",
   },
   {
-    src: "https://drive.google.com/uc?export=view&id=1jNjU0E30sicClmPCjJf0OUrX6-ClJ7gz",
-    bg: "#0F766E",
-    label: "Tô Giấy",
-    sub: "Đựng phở, bún, mì",
-    emoji: "🍜",
-  },
-  {
-    src: "https://drive.google.com/uc?export=view&id=1V5opotJH8N7hwlgDcQTlWtEzEqIG27LW",
-    bg: "#115E59",
-    label: "Ly Nhựa PET",
-    sub: "Trà sữa, nước uống",
+    src: "https://lh3.googleusercontent.com/d/1HtzcWALT0M4-Az_qUN9BRM4CanrCe9Mj",
+    bg: "#9B63A5", // Soft Lavender/Purple to match Ohlala bear cup
+    label: "Ly Giấy Ohlala",
+    sub: "Ly trà sữa Bear dễ thương",
     emoji: "🧋",
   },
   {
-    src: "https://drive.google.com/uc?export=view&id=1OjMVUNw8gZprM_xiTzmaiji1Ol-OPwLD",
-    bg: "#134E4A",
-    label: "Hộp Giấy",
-    sub: "Đóng gói thực phẩm",
-    emoji: "📦",
+    src: "https://lh3.googleusercontent.com/d/1TNxvYJiWx1XtvPMSyBhCK7N-JUrRZDyd",
+    bg: "#8A6D56", // Warm Kraft Brown to match Mio Homestay cup
+    label: "Ly Giấy Mio",
+    sub: "Thân thiện với môi trường",
+    emoji: "🥤",
+  },
+  {
+    src: "https://lh3.googleusercontent.com/d/1kgjlOnwSD8CB3AM1gNh6-I6NGpNi-S1K",
+    bg: "#486B2A", // Fresh Leaf Green to match Puy Lime green cup
+    label: "Ly Giấy Puy",
+    sub: "PUY - Ăn sạch, sống xinh",
+    emoji: "🥤",
+  },
+  {
+    src: "https://lh3.googleusercontent.com/d/1wl-gRNo-1GlBUDi8EIxd8dW6sgSXRlza",
+    bg: "#756C5F", // Dark Warm Clay (supports white text contrast) for Mia Oi cup
+    label: "Ly Giấy Mía Ơi",
+    sub: "Mía Ơi - Sweee ttt",
+    emoji: "🥤",
+  },
+  {
+    src: "https://lh3.googleusercontent.com/d/1hxtE4tZ44GlH_0Xou9yr6PKrstlhOsTB",
+    bg: "#C08A1D", // Festive Gold/Mustard Yellow for Good Tea cup
+    label: "Ly Giấy Good Tea",
+    sub: "Về nhà ăn Tết sum vầy",
+    emoji: "🥤",
   },
 ];
 
@@ -47,18 +61,13 @@ export function Hero() {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  useEffect(() => {
-    PRODUCTS.forEach((p, i) => {
-      const img = new Image();
-      img.src = p.src;
-      img.onerror = () => setImgError((e) => ({ ...e, [i]: true }));
-    });
-  }, []);
+
 
   const navigate = useCallback((dir: "next" | "prev") => {
     if (animLock.current) return;
     animLock.current = true;
-    setActiveIndex((i) => (dir === "next" ? (i + 1) % 4 : (i + 3) % 4));
+    const len = PRODUCTS.length;
+    setActiveIndex((i) => (dir === "next" ? (i + 1) % len : (i + len - 1) % len));
     setTimeout(() => {
       animLock.current = false;
     }, 650);
@@ -71,9 +80,9 @@ export function Hero() {
   }, [hovering, navigate]);
 
   const active = PRODUCTS[activeIndex];
-  const left = (activeIndex + 3) % 4;
-  const right = (activeIndex + 1) % 4;
-  const back = (activeIndex + 2) % 4;
+  const len = PRODUCTS.length;
+  const left = (activeIndex + len - 1) % len;
+  const right = (activeIndex + 1) % len;
 
   const getRole = (i: number) => {
     if (i === activeIndex) return "center";
@@ -85,7 +94,7 @@ export function Hero() {
   const styleFor = (role: string): React.CSSProperties => {
     const base: React.CSSProperties = {
       position: "absolute",
-      aspectRatio: "0.55 / 1",
+      aspectRatio: "1 / 1",
       transition:
         "transform 650ms cubic-bezier(0.4,0,0.2,1), filter 650ms, opacity 650ms, left 650ms, height 650ms, bottom 650ms",
       willChange: "transform, filter, opacity",
@@ -94,9 +103,9 @@ export function Hero() {
       return {
         ...base,
         left: "50%",
-        bottom: isMobile ? "20%" : 0,
-        height: isMobile ? "58%" : "90%",
-        transform: `translateX(-50%) scale(${isMobile ? 1.2 : 1.6})`,
+        bottom: isMobile ? "24%" : "12%",
+        height: isMobile ? "45%" : "60%",
+        transform: `translateX(-50%) scale(${isMobile ? 1.15 : 1.35})`,
         filter: "blur(0)",
         opacity: 1,
         zIndex: 20,
@@ -104,33 +113,33 @@ export function Hero() {
     if (role === "left")
       return {
         ...base,
-        left: isMobile ? "18%" : "28%",
-        bottom: isMobile ? "30%" : "10%",
-        height: isMobile ? "15%" : "26%",
-        transform: "translateX(-50%) scale(1)",
+        left: isMobile ? "15%" : "24%",
+        bottom: isMobile ? "28%" : "18%",
+        height: isMobile ? "25%" : "38%",
+        transform: "translateX(-50%) scale(0.85)",
         filter: "blur(2px)",
-        opacity: 0.75,
+        opacity: 0.65,
         zIndex: 10,
       };
     if (role === "right")
       return {
         ...base,
-        left: isMobile ? "82%" : "72%",
-        bottom: isMobile ? "30%" : "10%",
-        height: isMobile ? "15%" : "26%",
-        transform: "translateX(-50%) scale(1)",
+        left: isMobile ? "85%" : "76%",
+        bottom: isMobile ? "28%" : "18%",
+        height: isMobile ? "25%" : "38%",
+        transform: "translateX(-50%) scale(0.85)",
         filter: "blur(2px)",
-        opacity: 0.75,
+        opacity: 0.65,
         zIndex: 10,
       };
     return {
       ...base,
       left: "50%",
-      bottom: isMobile ? "32%" : "12%",
-      height: isMobile ? "12%" : "20%",
-      transform: "translateX(-50%) scale(1)",
+      bottom: isMobile ? "32%" : "22%",
+      height: isMobile ? "18%" : "28%",
+      transform: "translateX(-50%) scale(0.65)",
       filter: "blur(4px)",
-      opacity: 0.5,
+      opacity: 0.35,
       zIndex: 5,
     };
   };
@@ -257,6 +266,7 @@ export function Hero() {
                     objectFit: "contain",
                     objectPosition: "bottom center",
                     userSelect: "none",
+                    filter: "drop-shadow(0 20px 30px rgba(0,0,0,0.25))",
                   }}
                 />
               )}
