@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
@@ -21,7 +23,7 @@ export function AnimatedText({ text }: { text: string }) {
   return (
     <p
       ref={containerRef}
-      className="text-[#D7E2EA] font-medium text-center leading-relaxed max-w-[560px] mx-auto select-none"
+      className="text-foreground font-medium text-center leading-relaxed max-w-[560px] mx-auto select-none"
       style={{ fontSize: "clamp(1rem, 2vw, 1.35rem)" }}
     >
       {characters.map((char, index) => {
@@ -29,9 +31,9 @@ export function AnimatedText({ text }: { text: string }) {
         const start = index / totalLength;
         const end = (index + 1) / totalLength;
 
-        // Map scroll progress to opacity 0.2 -> 1
+        // Map scroll progress to opacity 0.35 -> 1
         // eslint-disable-next-line react-hooks/rules-of-hooks
-        const opacity = useTransform(scrollYProgress, [start, end], [0.2, 1]);
+        const opacity = useTransform(scrollYProgress, [start, end], [0.35, 1]);
 
         return (
           <span key={index} className="relative inline-block whitespace-pre-wrap">

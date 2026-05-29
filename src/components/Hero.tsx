@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState, useCallback } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
@@ -60,8 +62,6 @@ export function Hero() {
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
-
-
 
   const navigate = useCallback((dir: "next" | "prev") => {
     if (animLock.current) return;
@@ -158,7 +158,7 @@ export function Hero() {
       style={{
         backgroundColor: active.bg,
         transition: "background-color 650ms cubic-bezier(0.4,0,0.2,1)",
-        fontFamily: "Be Vietnam Pro, sans-serif",
+        fontFamily: "var(--font-display), sans-serif",
       }}
       className="relative w-full overflow-hidden h-screen"
     >
@@ -248,7 +248,8 @@ export function Hero() {
                 <div
                   className="w-full h-full flex items-center justify-center rounded-3xl"
                   style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))",
+                    background:
+                      "linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))",
                     fontSize: role === "center" ? 120 : 60,
                   }}
                 >

@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 import { ContactButton } from "./ContactButton";
@@ -5,8 +7,11 @@ import { LiveProjectButton } from "./LiveProjectButton";
 import { FadeIn } from "./FadeIn";
 import { Magnet } from "./Magnet";
 import { AnimatedText } from "./AnimatedText";
-import { Mail, ArrowUpRight } from "lucide-react";
+import { Mail, ArrowUpRight, Play, Sparkles } from "lucide-react";
 import { Hero } from "./Hero";
+import { InteractiveCatalog } from "./InteractiveCatalog";
+import { QuoteCalculator } from "./QuoteCalculator";
+import { ThemeToggle } from "./ThemeToggle";
 
 // Project Data
 const projectsData = [
@@ -114,8 +119,8 @@ export function JackPortfolio() {
   };
 
   return (
-    <div className="main-wrapper w-full bg-[#0C0C0C] text-[#D7E2EA] overflow-x-clip min-h-screen relative font-sans">
-      
+    <div className="main-wrapper w-full bg-background text-foreground transition-colors duration-300 min-h-screen relative font-sans">
+      <ThemeToggle />
       {/* 1. HERO SECTION */}
       <Hero />
 
@@ -123,17 +128,32 @@ export function JackPortfolio() {
       <MarqueeSection />
 
       {/* 3. ABOUT SECTION */}
-      <section id="about" className="min-h-screen w-full relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 bg-[#0C0C0C] overflow-hidden select-none">
+      <section
+        id="about"
+        className="min-h-screen w-full relative flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 bg-background transition-colors duration-300 overflow-hidden select-none"
+      >
         {/* Corner 3D icons */}
-        <FadeIn delay={0.1} x={-80} y={0} duration={0.9} className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-10 pointer-events-none">
+        <FadeIn
+          delay={0.1}
+          x={-80}
+          y={0}
+          duration={0.9}
+          className="absolute top-[4%] left-[1%] sm:left-[2%] md:left-[4%] z-10 pointer-events-none"
+        >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/moon_icon.11395d36.png"
             className="w-[120px] sm:w-[160px] md:w-[210px] h-auto object-contain"
             alt="Moon Icon"
           />
         </FadeIn>
-        
-        <FadeIn delay={0.25} x={-80} y={0} duration={0.9} className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] z-10 pointer-events-none">
+
+        <FadeIn
+          delay={0.25}
+          x={-80}
+          y={0}
+          duration={0.9}
+          className="absolute bottom-[8%] left-[3%] sm:left-[6%] md:left-[10%] z-10 pointer-events-none"
+        >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/p59_1.4659672e.png"
             className="w-[100px] sm:w-[140px] md:w-[180px] h-auto object-contain"
@@ -141,7 +161,13 @@ export function JackPortfolio() {
           />
         </FadeIn>
 
-        <FadeIn delay={0.15} x={80} y={0} duration={0.9} className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] z-10 pointer-events-none">
+        <FadeIn
+          delay={0.15}
+          x={80}
+          y={0}
+          duration={0.9}
+          className="absolute top-[4%] right-[1%] sm:right-[2%] md:right-[4%] z-10 pointer-events-none"
+        >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/lego_icon-1.703bb594.png"
             className="w-[120px] sm:w-[160px] md:w-[210px] h-auto object-contain"
@@ -149,7 +175,13 @@ export function JackPortfolio() {
           />
         </FadeIn>
 
-        <FadeIn delay={0.3} x={80} y={0} duration={0.9} className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] z-10 pointer-events-none">
+        <FadeIn
+          delay={0.3}
+          x={80}
+          y={0}
+          duration={0.9}
+          className="absolute bottom-[8%] right-[3%] sm:right-[6%] md:right-[10%] z-10 pointer-events-none"
+        >
           <img
             src="https://shrug-person-78902957.figma.site/_components/v2/ebb2b8f25d8e24d5f0a5ca8af4c950de81aa2fd7/Group_134-1.2e04f3ce.png"
             className="w-[130px] sm:w-[170px] md:w-[220px] h-auto object-contain"
@@ -160,13 +192,16 @@ export function JackPortfolio() {
         {/* Content wrapper */}
         <div className="flex flex-col items-center z-20 text-center max-w-4xl mx-auto">
           <FadeIn delay={0} y={40}>
-            <h2 className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-10 sm:mb-14 md:mb-16" style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}>
-              About me
+            <h2
+              className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-10 sm:mb-14 md:mb-16"
+              style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+            >
+              Về Chúng Tôi
             </h2>
           </FadeIn>
 
-          <div className="mb-16 sm:mb-20 md:mb-24 px-4">
-            <AnimatedText text="With more than five years of experience in design, i focus on branding, web design, and user experience, i truly enjoy working with businesses that aim to stand out and present their best image. Let's build something incredible together!" />
+          <div className="mb-12 sm:mb-14 md:mb-16 px-4">
+            <AnimatedText text="Với hơn 5 năm kinh nghiệm trong lĩnh vực thiết kế thương hiệu và in ấn bao bì F&B, chúng tôi tự hào đồng hành cùng hàng ngàn thương hiệu trà sữa, cafe trên toàn quốc. Đặt sự tinh tế trong thẩm mỹ thiết kế 3D và chất lượng bền vững lên hàng đầu!" />
           </div>
 
           <FadeIn delay={0.1} y={20}>
@@ -175,46 +210,19 @@ export function JackPortfolio() {
         </div>
       </section>
 
-      {/* 4. SERVICES SECTION */}
-      <section id="price" className="bg-[#FFFFFF] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 relative z-0">
-        <h2 className="text-[#0C0C0C] font-black uppercase text-center mb-16 sm:mb-20 md:mb-28" style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}>
-          Services
-        </h2>
-
-        <div className="w-full max-w-5xl mx-auto flex flex-col border-t border-[rgba(12,12,12,0.15)]">
-          {servicesData.map((svc, i) => (
-            <FadeIn key={svc.num} delay={i * 0.1} y={30} className="border-b border-[rgba(12,12,12,0.15)]">
-              <div className="flex flex-row items-center gap-6 sm:gap-10 md:gap-14 py-8 sm:py-10 md:py-12 text-left">
-                <span
-                  className="font-black leading-none text-[#0C0C0C] shrink-0 min-w-[70px] sm:min-w-[120px] md:min-w-[160px]"
-                  style={{ fontSize: "clamp(3rem, 10vw, 140px)" }}
-                >
-                  {svc.num}
-                </span>
-                <div className="flex flex-col gap-2">
-                  <h3
-                    className="font-medium uppercase text-[#0C0C0C] leading-tight"
-                    style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)" }}
-                  >
-                    {svc.name}
-                  </h3>
-                  <p
-                    className="font-light text-[#0C0C0C]/60 leading-relaxed max-w-2xl"
-                    style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)" }}
-                  >
-                    {svc.desc}
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
+      {/* 4. INTERACTIVE CATALOG SECTION */}
+      <InteractiveCatalog />
 
       {/* 5. PROJECTS SECTION */}
-      <section id="projects" className="bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-5 sm:px-8 md:px-10 pt-20 pb-24">
+      <section
+        id="projects"
+        className="bg-background transition-colors duration-300 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-5 sm:px-8 md:px-10 pt-20 pb-[40vh]"
+      >
         <FadeIn delay={0} y={40}>
-          <h2 className="hero-heading font-black uppercase text-center mb-16 sm:mb-20 md:mb-28" style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}>
+          <h2
+            className="hero-heading font-black uppercase text-center mb-16 sm:mb-20 md:mb-28"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
             Project
           </h2>
         </FadeIn>
@@ -233,18 +241,141 @@ export function JackPortfolio() {
         </div>
       </section>
 
+      {/* 6. QUOTE CALCULATOR SECTION */}
+      <QuoteCalculator />
+
+      {/* 7. FACTORY VIDEOS SECTION */}
+      <section
+        id="videos"
+        className="bg-background transition-colors duration-300 py-24 px-5 sm:px-8 md:px-10 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 relative z-10"
+      >
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-12">
+            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#9CE3C6] uppercase mb-3 block">
+              QUY TRÌNH SẢN XUẤT THỰC TẾ
+            </span>
+            <h2
+              className="hero-heading font-black uppercase text-center mb-4"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
+            >
+              Video Tại Nhà Máy
+            </h2>
+            <p className="text-[#D2E4DC]/60 max-w-lg mx-auto text-sm leading-relaxed font-light">
+              Khám phá quy trình in ấn khép kín, tự động và đạt tiêu chuẩn vệ sinh an toàn thực phẩm
+              của chúng tôi.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                title: "Quy trình in cốc giấy tại nhà máy",
+                meta: "Sản xuất ly lạnh 2 lớp PE",
+                ytId: "8Z2tkkSgoE4",
+                duration: "2:30",
+              },
+              {
+                title: "In logo thương hiệu trên ly giấy",
+                meta: "Quy trình căn chỉnh bản màu trục quay",
+                ytId: "dR6raK9-k0Y",
+                duration: "3:15",
+              },
+              {
+                title: "Sản xuất tô giấy chống thấm nước nóng",
+                meta: "Ép đáy nhiệt tự động công nghệ cao",
+                ytId: "TDaCUSKEEuk",
+                duration: "1:45",
+              },
+            ].map((video, idx) => (
+              <div
+                key={idx}
+                className="rounded-2xl overflow-hidden border border-[#D2E4DC]/10 bg-gradient-to-br from-[#0B100D] to-[#0E1511] group hover:border-[#9CE3C6]/30 transition-all duration-300"
+              >
+                <div className="aspect-video bg-[#0A2218]/60 relative flex items-center justify-center overflow-hidden">
+                  <img
+                    src={`https://img.youtube.com/vi/${video.ytId}/hqdefault.jpg`}
+                    alt={video.title}
+                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <button
+                    onClick={() =>
+                      window.open(`https://www.youtube.com/watch?v=${video.ytId}`, "_blank")
+                    }
+                    className="w-14 h-14 rounded-full bg-[#9CE3C6] text-[#0B100D] flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-[0px_4px_16px_rgba(156,227,198,0.4)] cursor-pointer z-10"
+                  >
+                    <Play className="w-6 h-6 fill-current ml-0.5" />
+                  </button>
+                  <span className="absolute bottom-2 right-2 text-[10px] text-[#9CE3C6] bg-[#0B100D]/80 px-2 py-0.5 rounded-md font-bold tracking-wider">
+                    {video.duration}
+                  </span>
+                </div>
+                <div className="p-4 text-left">
+                  <h3 className="text-sm font-bold text-[#D2E4DC] line-clamp-1">{video.title}</h3>
+                  <p className="text-xs text-[#D2E4DC]/50 mt-1">{video.meta}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Optional Contact Anchor & Minimal Footer */}
-      <footer id="contact" className="bg-[#0C0C0C] border-t border-[#D7E2EA]/10 py-12 px-6 text-center text-[#D7E2EA]/50 text-sm tracking-wider uppercase">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div>© {new Date().getFullYear()} JACK — 3D CREATOR. ALL RIGHTS RESERVED.</div>
-          <button
-            onClick={handleContactClick}
-            className="flex items-center gap-2 text-[#D7E2EA] hover:text-[#BBCCD7] transition-colors"
-          >
-            <Mail size={16} />
-            <span>jack@example.com</span>
-            <ArrowUpRight size={16} />
-          </button>
+      <footer
+        id="contact"
+        className="bg-background transition-colors duration-300 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 py-16 px-6 text-left text-foreground/70 text-sm relative z-10"
+      >
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
+          {/* Left Column: Factory Information */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-black uppercase text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E] tracking-wider">
+              XƯỞNG SX LY GIẤY & TÔ GIẤY
+            </h3>
+            <p className="text-xs text-foreground/60 leading-relaxed max-w-sm font-light">
+              Chuyên thiết kế và sản xuất ly giấy, ly nhựa, tô giấy, bao bì giấy chất lượng cao phục
+              vụ các thương hiệu F&B trên toàn quốc. Đảm bảo vệ sinh an toàn thực phẩm.
+            </p>
+            <div className="space-y-2 text-xs text-foreground/80 font-light">
+              <p>
+                <strong>Nhà máy HCM:</strong> Số 11 đường số 6, KP 7, P. Hiệp Bình Chánh, Thủ Đức,
+                TP.HCM
+              </p>
+              <p>
+                <strong>Văn phòng Đắk Lắk:</strong> P17, Đường Tôn Đức Thắng, Eco City, P. Tân An,
+                Buôn Ma Thuột
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column: Contact Details */}
+          <div className="space-y-4 md:text-right flex flex-col md:items-end justify-between">
+            <div className="space-y-2">
+              <h4 className="text-xs uppercase tracking-widest text-foreground/40 font-bold">
+                TƯ VẤN & BÁO GIÁ NHANH
+              </h4>
+              <p className="text-lg font-black text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E]">
+                <a href="tel:0902618079" className="hover:underline">
+                  0902 618 079
+                </a>
+              </p>
+              <p className="text-lg font-black text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E]">
+                <a href="tel:0909148131" className="hover:underline">
+                  0909 148 131
+                </a>
+              </p>
+            </div>
+
+            <div className="flex flex-col md:items-end gap-2 text-xs text-foreground/50 mt-4 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 pt-4 w-full">
+              <div>© {new Date().getFullYear()} MINTY PACKAGING. ALL RIGHTS RESERVED.</div>
+              <button
+                onClick={handleContactClick}
+                className="flex items-center gap-2 text-foreground hover:text-[#9CE3C6] dark:hover:text-[#9CE3C6] hover:text-[#1F6E4E] transition-colors bg-transparent border-none p-0 cursor-pointer"
+              >
+                <Mail size={14} />
+                <span>lygiaytogiaygiare@gmail.com</span>
+                <ArrowUpRight size={14} />
+              </button>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
@@ -273,7 +404,7 @@ function MarqueeSection() {
   return (
     <div
       ref={sectionRef}
-      className="bg-[#0C0C0C] pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3"
+      className="bg-background transition-colors duration-300 pt-24 sm:pt-32 md:pt-40 pb-10 overflow-hidden flex flex-col gap-3"
     >
       {/* Row 1: Moves right on scroll */}
       <div
@@ -318,7 +449,7 @@ function MarqueeSection() {
 
 // Sub-component: Stacking Project Card
 interface ProjectCardProps {
-  project: typeof projectsData[number];
+  project: (typeof projectsData)[number];
   index: number;
   totalCards: number;
   isMobile: boolean;
@@ -326,7 +457,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, index, totalCards, isMobile }: ProjectCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  
+
   // Track scroll progress of the container relative to the viewport
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -339,29 +470,32 @@ function ProjectCard({ project, index, totalCards, isMobile }: ProjectCardProps)
   return (
     <div
       ref={containerRef}
-      className="h-auto md:h-[85vh] w-full flex flex-col justify-start relative"
+      className="h-auto md:h-[120vh] w-full flex flex-col justify-start md:sticky relative"
       style={{
         zIndex: index + 1,
+        top: isMobile ? "auto" : `calc(6rem + ${index * 28}px)`,
       }}
     >
       <motion.div
         style={{
           scale: isMobile ? 1 : scale,
-          top: isMobile ? "auto" : `calc(6rem + ${index * 28}px)`,
         }}
-        className="relative md:sticky w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#D7E2EA] bg-[#0C0C0C] p-4 sm:p-6 md:p-8 flex flex-col justify-between"
+        className="relative w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 dark:border-[#9CE3C6]/60 border-[#1F6E4E]/30 bg-background text-foreground transition-colors duration-300 p-4 sm:p-6 md:p-8 flex flex-col justify-between"
       >
         {/* Card Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#D7E2EA]/15 pb-6 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b dark:border-[#D2E4DC]/15 border-foreground/10 pb-6 mb-6">
           <div className="flex items-center gap-4 sm:gap-6">
-            <span className="font-black text-[#D7E2EA] leading-none shrink-0" style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}>
+            <span
+              className="font-black text-foreground leading-none shrink-0"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 5rem)" }}
+            >
               {project.num}
             </span>
             <div className="flex flex-col text-left">
-              <span className="text-xs uppercase tracking-widest text-[#D7E2EA]/60 font-medium">
+              <span className="text-xs uppercase tracking-widest text-foreground/60 font-medium">
                 {project.category}
               </span>
-              <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-[#D7E2EA] tracking-tight">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black uppercase text-foreground tracking-tight">
                 {project.name}
               </h3>
             </div>
@@ -377,14 +511,14 @@ function ProjectCard({ project, index, totalCards, isMobile }: ProjectCardProps)
               src={project.img1}
               alt={`${project.name} A`}
               className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px]"
-              style={{ height: "clamp(130px, 16vw, 230px)" }}
+              style={{ height: "clamp(120px, 14vw, 200px)" }}
               loading="lazy"
             />
             <img
               src={project.img2}
               alt={`${project.name} B`}
               className="w-full object-cover rounded-[30px] sm:rounded-[40px] md:rounded-[50px] lg:rounded-[60px]"
-              style={{ height: "clamp(160px, 22vw, 340px)" }}
+              style={{ height: "clamp(150px, 18vw, 280px)" }}
               loading="lazy"
             />
           </div>

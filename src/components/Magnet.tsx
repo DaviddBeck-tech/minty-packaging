@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useRef, useState, useEffect } from "react";
 
 interface MagnetProps {
@@ -38,11 +40,7 @@ export function Magnet({
       const minY = rect.top - padding;
       const maxY = rect.bottom + padding;
 
-      const isInside =
-        clientX >= minX &&
-        clientX <= maxX &&
-        clientY >= minY &&
-        clientY <= maxY;
+      const isInside = clientX >= minX && clientX <= maxX && clientY >= minY && clientY <= maxY;
 
       if (isInside) {
         const distanceX = clientX - centerX;

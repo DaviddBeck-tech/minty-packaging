@@ -1,5 +1,4 @@
-@import "tailwindcss" source(none);
-@source "../src";
+@import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -29,6 +28,9 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-mint-accent: #9CE3C6;
+  --color-sage-muted: #D2E4DC;
+  --color-sage-dark: #1F6E4E;
   --color-teal-50: #f0fdfa;
   --color-teal-100: #ccfbf1;
   --color-teal-500: #14b8a6;
@@ -43,13 +45,19 @@
   --color-slate-500: #64748b;
   --color-slate-600: #475569;
   --color-slate-900: #0f172a;
-  --font-sans: "Kanit", sans-serif;
+  --font-sans: var(--font-display);
+  --font-display: var(--font-display);
 }
 
 :root {
   --radius: 0.75rem;
-  --background: #0C0C0C;
-  --foreground: #D7E2EA;
+  --background: #F5FAF7;
+  --foreground: #0B100D;
+}
+
+.dark {
+  --background: #0B100D;
+  --foreground: #D2E4DC;
 }
 
 @layer base {
@@ -57,28 +65,61 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border-color: rgba(215, 226, 234, 0.15);
+    border-color: rgba(210, 228, 220, 0.15);
+    transition: background-color 300ms ease, border-color 300ms ease;
   }
-  html, body, #root {
-    background-color: #0C0C0C !important;
-    color: #D7E2EA;
-    font-family: "Kanit", sans-serif;
+  html,
+  body,
+  #root {
+    background-color: var(--background) !important;
+    color: var(--foreground);
+    font-family: var(--font-sans), sans-serif;
     scroll-behavior: smooth;
-    overflow-x: clip;
+    transition: background-color 300ms ease, color 300ms ease;
   }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #0C0C0C; }
-  ::-webkit-scrollbar-thumb { background: #BBCCD7; border-radius: 3px; }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--background);
+    transition: background-color 300ms ease;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1F6E4E;
+    border-radius: 3px;
+  }
+  .dark ::-webkit-scrollbar-thumb {
+    background: #6DBB9A;
+  }
 }
 
 @layer utilities {
   .hero-heading {
-    background: linear-gradient(180deg, #646973 0%, #BBCCD7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    color: transparent;
+    background-image: linear-gradient(135deg, #0D3A2B 0%, #1F6E4E 65%, #38B27E 100%);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    transition: none !important;
   }
-  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 600ms ease, transform 600ms ease; }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .dark .hero-heading {
+    background-image: linear-gradient(180deg, #D2E4DC 0%, #9CE3C6 100%);
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    color: transparent !important;
+    transition: none !important;
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 600ms ease,
+      transform 600ms ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
