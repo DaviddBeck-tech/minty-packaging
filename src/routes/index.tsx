@@ -1,29 +1,32 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/Hero";
+import { Categories, Pricing, USP, Videos, News, CTABanner, Footer } from "@/components/Sections";
+import { useReveal } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Ly Giấy Tô Giấy — Xưởng in bao bì giấy & nhựa" },
+      { name: "description", content: "Xưởng sản xuất ly giấy, tô giấy, ly nhựa PET, hộp giấy. In logo theo yêu cầu, giao hàng toàn quốc." },
+      { property: "og:title", content: "Ly Giấy Tô Giấy — Xưởng in bao bì" },
+      { property: "og:description", content: "Sản xuất tại xưởng, giá tốt, in logo theo yêu cầu." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
+  useReveal();
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <main>
+      <Hero />
+      <Categories />
+      <Pricing />
+      <USP />
+      <Videos />
+      <News />
+      <CTABanner />
+      <Footer />
+    </main>
   );
 }
