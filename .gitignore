@@ -36,3 +36,19 @@ tsconfig.tsbuildinfo
 *.njsproj
 *.sln
 *.sw?
+
+# Environment variables
+.env
+.env*.local
+
+# AI & Code Intelligence Tools
+.claude/
+.lovable/
+.gitnexus/
+
+# Vercel & Testing
+.vercel
+coverage/
+
+# OS
+Thumbs.db

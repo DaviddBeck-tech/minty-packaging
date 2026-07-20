@@ -7,7 +7,7 @@ interface LiveProjectButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEl
 export function LiveProjectButton({ className = "", ...props }: LiveProjectButtonProps) {
   return (
     <button
-      className={`rounded-full border-2 border-[#1F6E4E] text-[#1F6E4E] dark:border-[#D2E4DC] dark:text-[#D2E4DC] font-medium uppercase tracking-widest text-sm sm:text-base px-8 py-3 sm:px-10 sm:py-3.5 transition-all duration-300 hover:bg-[#1F6E4E]/10 dark:hover:bg-[#D2E4DC]/10 active:scale-95 cursor-pointer select-none ${className}`}
+      className={`rounded-full border-2 border-[#1F6E4E] text-[#1F6E4E] font-medium uppercase tracking-widest text-sm sm:text-base px-8 py-3 sm:px-10 sm:py-3.5 transition-all duration-300 hover:bg-[#1F6E4E]/10 active:scale-95 cursor-pointer select-none ${className}`}
       {...props}
     >
       Live Project

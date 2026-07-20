@@ -5,48 +5,61 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 
 const PRODUCTS = [
   {
-    src: "https://lh3.googleusercontent.com/d/1nL9lLF0Thz78hGmY0PYKoJM7WFiq636_",
+    src: "/cups/no6.png",
     bg: "#0D3A2B", // Deep Forest Green to match the Nº6 Drink & Gelato green cup
-    label: "Ly Giấy Nº6",
-    sub: "In logo trà sữa, kem, gelato",
+    label: "Paper Cup Nº6",
+    sub: "Logo printing for milk tea, ice cream, gelato",
     emoji: "🥤",
   },
   {
-    src: "https://lh3.googleusercontent.com/d/1HtzcWALT0M4-Az_qUN9BRM4CanrCe9Mj",
+    src: "/cups/ohlala.png",
     bg: "#9B63A5", // Soft Lavender/Purple to match Ohlala bear cup
-    label: "Ly Giấy Ohlala",
-    sub: "Ly trà sữa Bear dễ thương",
+    label: "Paper Cup Ohlala",
+    sub: "Cute Bear milk tea cup",
     emoji: "🧋",
   },
   {
-    src: "https://lh3.googleusercontent.com/d/1TNxvYJiWx1XtvPMSyBhCK7N-JUrRZDyd",
+    src: "/cups/mio.png",
     bg: "#8A6D56", // Warm Kraft Brown to match Mio Homestay cup
-    label: "Ly Giấy Mio",
-    sub: "Thân thiện với môi trường",
+    label: "Paper Cup Mio",
+    sub: "Eco-friendly material",
     emoji: "🥤",
   },
   {
-    src: "https://lh3.googleusercontent.com/d/1kgjlOnwSD8CB3AM1gNh6-I6NGpNi-S1K",
+    src: "/cups/puy.png",
     bg: "#486B2A", // Fresh Leaf Green to match Puy Lime green cup
-    label: "Ly Giấy Puy",
-    sub: "PUY - Ăn sạch, sống xinh",
+    label: "Paper Cup Puy",
+    sub: "PUY - Eat clean, live pretty",
     emoji: "🥤",
   },
   {
-    src: "https://lh3.googleusercontent.com/d/1wl-gRNo-1GlBUDi8EIxd8dW6sgSXRlza",
+    src: "/cups/miaoi.png",
     bg: "#756C5F", // Dark Warm Clay (supports white text contrast) for Mia Oi cup
-    label: "Ly Giấy Mía Ơi",
-    sub: "Mía Ơi - Sweee ttt",
+    label: "Paper Cup Mia Oi",
+    sub: "Mia Oi - Sweee ttt",
     emoji: "🥤",
   },
   {
-    src: "https://lh3.googleusercontent.com/d/1hxtE4tZ44GlH_0Xou9yr6PKrstlhOsTB",
+    src: "/cups/goodtea.png",
     bg: "#C08A1D", // Festive Gold/Mustard Yellow for Good Tea cup
-    label: "Ly Giấy Good Tea",
-    sub: "Về nhà ăn Tết sum vầy",
+    label: "Paper Cup Good Tea",
+    sub: "Home for a cozy Tet reunion",
     emoji: "🥤",
   },
 ];
+
+const NAV_LINKS = [
+  { label: "Products", target: "catalog" },
+  { label: "Pricing", target: "calculator" },
+  { label: "Video", target: "videos" },
+  { label: "Projects", target: "projects" },
+  { label: "Contact", target: "contact" },
+];
+
+function scrollToId(id: string) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
 export function Hero() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -189,7 +202,7 @@ export function Hero() {
             whiteSpace: "nowrap",
           }}
         >
-          BAO BÌ
+          PACKAGING
         </span>
       </div>
 
@@ -198,32 +211,33 @@ export function Hero() {
         className="absolute top-0 left-0 right-0 flex items-center justify-between"
         style={{ zIndex: 60, padding: "20px 32px" }}
       >
-        <div>
-          <div style={{ fontWeight: 700, fontSize: 18, color: "#fff" }}>LY GIẤY</div>
-          <div
-            style={{
-              fontSize: 11,
-              color: "rgba(255,255,255,0.7)",
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-            }}
-          >
-            Tô Giấy
-          </div>
-        </div>
+        <a href="#" aria-label="Ly Giấy Tô Giấy">
+          <img
+            src="/logo-lygiay-white.svg"
+            alt="Ly Giấy Tô Giấy"
+            className="h-9 sm:h-10 w-auto"
+            draggable={false}
+          />
+        </a>
         <div className="hidden md:flex" style={{ gap: 32 }}>
-          {["Sản Phẩm", "Báo Giá", "Video", "Tin Tức", "Liên Hệ"].map((l) => (
+          {NAV_LINKS.map((l) => (
             <a
-              key={l}
-              href="#"
+              key={l.label}
+              href={`#${l.target}`}
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToId(l.target);
+              }}
               style={{ color: "#fff", opacity: 0.85, fontSize: 13 }}
               className="hover:opacity-100 transition"
             >
-              {l}
+              {l.label}
             </a>
           ))}
         </div>
         <button
+          type="button"
+          onClick={() => scrollToId("calculator")}
           className="rounded-full hover:scale-105 transition-transform"
           style={{
             background: "#fff",
@@ -234,7 +248,7 @@ export function Hero() {
             transition: "all 150ms, color 650ms",
           }}
         >
-          Báo Giá Ngay
+          Get a Quote
         </button>
       </nav>
 
@@ -316,11 +330,12 @@ export function Hero() {
           className="hidden sm:block"
           style={{ fontSize: 12, color: "#fff", opacity: 0.8, lineHeight: 1.7, marginBottom: 20 }}
         >
-          Sản xuất tại xưởng · Giao hàng tận nơi · In logo theo yêu cầu · Giá xưởng tốt nhất.
+          Factory-direct production · Nationwide delivery · Custom logo printing · Best factory
+          price.
         </p>
         <div className="flex gap-3">
           <button
-            aria-label="Trước"
+            aria-label="Previous"
             onClick={() => navigate("prev")}
             className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center hover:scale-110 transition"
             style={{ border: "1.5px solid #fff", background: "transparent" }}
@@ -330,7 +345,7 @@ export function Hero() {
             <ArrowLeft color="#fff" size={22} strokeWidth={2} />
           </button>
           <button
-            aria-label="Sau"
+            aria-label="Next"
             onClick={() => navigate("next")}
             className="w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center hover:scale-110 transition"
             style={{ border: "1.5px solid #fff", background: "transparent" }}
@@ -344,7 +359,11 @@ export function Hero() {
 
       {/* bottom-right */}
       <a
-        href="#products"
+        href="#catalog"
+        onClick={(e) => {
+          e.preventDefault();
+          scrollToId("catalog");
+        }}
         className="absolute flex items-center gap-2 font-display hover:opacity-100"
         style={{
           bottom: isMobile ? 24 : 80,
@@ -359,7 +378,7 @@ export function Hero() {
           transition: "opacity 200ms",
         }}
       >
-        XEM NGAY
+        VIEW NOW
         <ArrowRight className="w-5 h-5 sm:w-8 sm:h-8" strokeWidth={2} />
       </a>
 

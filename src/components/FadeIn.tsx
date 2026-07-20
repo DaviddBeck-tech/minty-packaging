@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
 
 interface FadeInProps {
@@ -22,8 +22,11 @@ export function FadeIn({
   as = "div",
   className = "",
 }: FadeInProps) {
-  // Create a motion component dynamically
-  const MotionComponent = motion.create(as as any);
+  // Create a motion component dynamically, memoized so its identity stays
+  // stable across re-renders. Recreating it on every render would make React
+  // treat it as a brand-new component type and remount the whole subtree,
+  // re-triggering the fade/slide-in animation (the "page jump/reload" bug).
+  const MotionComponent = useMemo(() => motion.create(as as any), [as]);
 
   return (
     <MotionComponent

@@ -11,34 +11,20 @@ const beVietnamPro = Be_Vietnam_Pro({
 });
 
 export const metadata: Metadata = {
-  title: "Jack -- 3D Creator",
+  title: "Paper Cups & Bowls — Custom F&B Packaging Factory",
   description:
-    "Jack's portfolio landing page - 3D Creator driven by crafting striking and unforgettable projects",
+    "Factory-direct paper cups, plastic cups and paper bowls with custom logo printing for F&B brands. Free 3D mockups, fast 3–5 day turnaround, nationwide delivery.",
   openGraph: {
-    title: "Jack -- 3D Creator",
-    description: "Jack's portfolio landing page - 3D Creator",
+    title: "Paper Cups & Bowls — Custom F&B Packaging Factory",
+    description:
+      "Factory-direct custom-printed paper cups, plastic cups and paper bowls for F&B brands.",
     type: "website",
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${beVietnamPro.variable} dark`}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.theme === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
-                  document.documentElement.classList.remove('dark')
-                } else {
-                  document.documentElement.classList.add('dark')
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
-      </head>
+    <html lang="en" className={beVietnamPro.variable}>
       <body className="antialiased">
         <Providers>{children}</Providers>
       </body>

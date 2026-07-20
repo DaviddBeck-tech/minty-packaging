@@ -11,7 +11,9 @@ import { Mail, ArrowUpRight, Play, Sparkles } from "lucide-react";
 import { Hero } from "./Hero";
 import { InteractiveCatalog } from "./InteractiveCatalog";
 import { QuoteCalculator } from "./QuoteCalculator";
-import { ThemeToggle } from "./ThemeToggle";
+
+// Premium champagne-gold accent (shared with the catalog section)
+const GOLD = "#C9A961";
 
 // Project Data
 const projectsData = [
@@ -119,8 +121,7 @@ export function JackPortfolio() {
   };
 
   return (
-    <div className="main-wrapper w-full bg-background text-foreground transition-colors duration-300 min-h-screen relative font-sans">
-      <ThemeToggle />
+    <div className="main-wrapper w-full bg-background text-foreground min-h-screen relative font-sans">
       {/* 1. HERO SECTION */}
       <Hero />
 
@@ -196,12 +197,12 @@ export function JackPortfolio() {
               className="hero-heading font-black uppercase leading-none tracking-tight text-center mb-10 sm:mb-14 md:mb-16"
               style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
             >
-              Về Chúng Tôi
+              About Us
             </h2>
           </FadeIn>
 
           <div className="mb-12 sm:mb-14 md:mb-16 px-4">
-            <AnimatedText text="Với hơn 5 năm kinh nghiệm trong lĩnh vực thiết kế thương hiệu và in ấn bao bì F&B, chúng tôi tự hào đồng hành cùng hàng ngàn thương hiệu trà sữa, cafe trên toàn quốc. Đặt sự tinh tế trong thẩm mỹ thiết kế 3D và chất lượng bền vững lên hàng đầu!" />
+            <AnimatedText text="With over 5 years of experience in F&B brand design and packaging printing, we are proud to partner with thousands of milk tea and coffee brands nationwide. We always put refined 3D design aesthetics and lasting quality first!" />
           </div>
 
           <FadeIn delay={0.1} y={20}>
@@ -216,7 +217,7 @@ export function JackPortfolio() {
       {/* 5. PROJECTS SECTION */}
       <section
         id="projects"
-        className="bg-background transition-colors duration-300 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-5 sm:px-8 md:px-10 pt-20 pb-[40vh]"
+        className="bg-background transition-colors duration-300 rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 relative px-5 sm:px-8 md:px-10 pt-20 pb-20 md:pb-28"
       >
         <FadeIn delay={0} y={40}>
           <h2
@@ -245,137 +246,73 @@ export function JackPortfolio() {
       <QuoteCalculator />
 
       {/* 7. FACTORY VIDEOS SECTION */}
-      <section
-        id="videos"
-        className="bg-background transition-colors duration-300 py-24 px-5 sm:px-8 md:px-10 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 relative z-10"
-      >
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-12">
-            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#9CE3C6] uppercase mb-3 block">
-              QUY TRÌNH SẢN XUẤT THỰC TẾ
-            </span>
-            <h2
-              className="hero-heading font-black uppercase text-center mb-4"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
-            >
-              Video Tại Nhà Máy
-            </h2>
-            <p className="text-[#D2E4DC]/60 max-w-lg mx-auto text-sm leading-relaxed font-light">
-              Khám phá quy trình in ấn khép kín, tự động và đạt tiêu chuẩn vệ sinh an toàn thực phẩm
-              của chúng tôi.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Quy trình in cốc giấy tại nhà máy",
-                meta: "Sản xuất ly lạnh 2 lớp PE",
-                ytId: "8Z2tkkSgoE4",
-                duration: "2:30",
-              },
-              {
-                title: "In logo thương hiệu trên ly giấy",
-                meta: "Quy trình căn chỉnh bản màu trục quay",
-                ytId: "dR6raK9-k0Y",
-                duration: "3:15",
-              },
-              {
-                title: "Sản xuất tô giấy chống thấm nước nóng",
-                meta: "Ép đáy nhiệt tự động công nghệ cao",
-                ytId: "TDaCUSKEEuk",
-                duration: "1:45",
-              },
-            ].map((video, idx) => (
-              <div
-                key={idx}
-                className="rounded-2xl overflow-hidden border border-[#D2E4DC]/10 bg-gradient-to-br from-[#0B100D] to-[#0E1511] group hover:border-[#9CE3C6]/30 transition-all duration-300"
-              >
-                <div className="aspect-video bg-[#0A2218]/60 relative flex items-center justify-center overflow-hidden">
-                  <img
-                    src={`https://img.youtube.com/vi/${video.ytId}/hqdefault.jpg`}
-                    alt={video.title}
-                    className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <button
-                    onClick={() =>
-                      window.open(`https://www.youtube.com/watch?v=${video.ytId}`, "_blank")
-                    }
-                    className="w-14 h-14 rounded-full bg-[#9CE3C6] text-[#0B100D] flex items-center justify-center hover:scale-110 active:scale-95 transition-transform shadow-[0px_4px_16px_rgba(156,227,198,0.4)] cursor-pointer z-10"
-                  >
-                    <Play className="w-6 h-6 fill-current ml-0.5" />
-                  </button>
-                  <span className="absolute bottom-2 right-2 text-[10px] text-[#9CE3C6] bg-[#0B100D]/80 px-2 py-0.5 rounded-md font-bold tracking-wider">
-                    {video.duration}
-                  </span>
-                </div>
-                <div className="p-4 text-left">
-                  <h3 className="text-sm font-bold text-[#D2E4DC] line-clamp-1">{video.title}</h3>
-                  <p className="text-xs text-[#D2E4DC]/50 mt-1">{video.meta}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <FactoryVideos />
 
       {/* Optional Contact Anchor & Minimal Footer */}
       <footer
         id="contact"
-        className="bg-background transition-colors duration-300 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 py-16 px-6 text-left text-foreground/70 text-sm relative z-10"
+        className="bg-background transition-colors duration-300 border-t border-foreground/10 py-16 px-6 text-left text-foreground/70 text-sm relative z-10"
       >
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Left Column: Factory Information */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-black uppercase text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E] tracking-wider">
-              XƯỞNG SX LY GIẤY & TÔ GIẤY
-            </h3>
-            <p className="text-xs text-foreground/60 leading-relaxed max-w-sm font-light">
-              Chuyên thiết kế và sản xuất ly giấy, ly nhựa, tô giấy, bao bì giấy chất lượng cao phục
-              vụ các thương hiệu F&B trên toàn quốc. Đảm bảo vệ sinh an toàn thực phẩm.
-            </p>
-            <div className="space-y-2 text-xs text-foreground/80 font-light">
-              <p>
-                <strong>Nhà máy HCM:</strong> Số 11 đường số 6, KP 7, P. Hiệp Bình Chánh, Thủ Đức,
-                TP.HCM
+          <FadeIn delay={0} y={25} className="space-y-4">
+            <div>
+              <h3 className="text-lg font-black uppercase text-[#1F6E4E] tracking-wider">
+                PAPER CUP & BOWL FACTORY
+              </h3>
+              <p className="text-xs text-foreground/60 leading-relaxed max-w-sm font-light mt-4">
+                Specializing in the design and manufacture of high-quality paper cups, plastic cups,
+                paper bowls and paper packaging for F&B brands nationwide. Food safety guaranteed.
               </p>
-              <p>
-                <strong>Văn phòng Đắk Lắk:</strong> P17, Đường Tôn Đức Thắng, Eco City, P. Tân An,
-                Buôn Ma Thuột
-              </p>
+              <div className="space-y-2 text-xs text-foreground/80 font-light mt-4">
+                <p>
+                  <strong>HCM Factory:</strong> No. 11, Street 6, Quarter 7, Hiep Binh Chanh Ward,
+                  Thu Duc, HCMC
+                </p>
+                <p>
+                  <strong>Dak Lak Office:</strong> P17, Ton Duc Thang Street, Eco City, Tan An Ward,
+                  Buon Ma Thuot
+                </p>
+              </div>
             </div>
-          </div>
+          </FadeIn>
 
           {/* Right Column: Contact Details */}
-          <div className="space-y-4 md:text-right flex flex-col md:items-end justify-between">
-            <div className="space-y-2">
-              <h4 className="text-xs uppercase tracking-widest text-foreground/40 font-bold">
-                TƯ VẤN & BÁO GIÁ NHANH
-              </h4>
-              <p className="text-lg font-black text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E]">
-                <a href="tel:0902618079" className="hover:underline">
-                  0902 618 079
-                </a>
-              </p>
-              <p className="text-lg font-black text-[#9CE3C6] dark:text-[#9CE3C6] text-[#1F6E4E]">
-                <a href="tel:0909148131" className="hover:underline">
-                  0909 148 131
-                </a>
-              </p>
-            </div>
+          <FadeIn
+            delay={0.15}
+            y={25}
+            className="space-y-4 md:text-right flex flex-col md:items-end justify-between"
+          >
+            <div className="w-full">
+              <div className="space-y-2">
+                <h4 className="text-xs uppercase tracking-widest text-foreground/40 font-bold">
+                  QUICK CONSULTATION & QUOTE
+                </h4>
+                <p className="text-lg font-black text-[#1F6E4E]">
+                  <a href="tel:0902618079" className="hover:underline">
+                    0902 618 079
+                  </a>
+                </p>
+                <p className="text-lg font-black text-[#1F6E4E]">
+                  <a href="tel:0909148131" className="hover:underline">
+                    0909 148 131
+                  </a>
+                </p>
+              </div>
 
-            <div className="flex flex-col md:items-end gap-2 text-xs text-foreground/50 mt-4 border-t border-[#D2E4DC]/10 dark:border-[#D2E4DC]/10 border-foreground/10 pt-4 w-full">
-              <div>© {new Date().getFullYear()} MINTY PACKAGING. ALL RIGHTS RESERVED.</div>
-              <button
-                onClick={handleContactClick}
-                className="flex items-center gap-2 text-foreground hover:text-[#9CE3C6] dark:hover:text-[#9CE3C6] hover:text-[#1F6E4E] transition-colors bg-transparent border-none p-0 cursor-pointer"
-              >
-                <Mail size={14} />
-                <span>lygiaytogiaygiare@gmail.com</span>
-                <ArrowUpRight size={14} />
-              </button>
+              <div className="flex flex-col md:items-end gap-2 text-xs text-foreground/50 mt-4 border-t border-foreground/10 pt-4 w-full">
+                <div>© {new Date().getFullYear()} MINTY PACKAGING. ALL RIGHTS RESERVED.</div>
+                <button
+                  onClick={handleContactClick}
+                  className="flex items-center gap-2 text-foreground hover:text-[#1F6E4E] transition-colors bg-transparent border-none p-0 cursor-pointer self-start md:self-end"
+                >
+                  <Mail size={14} />
+                  <span>lygiaytogiaygiare@gmail.com</span>
+                  <ArrowUpRight size={14} />
+                </button>
+              </div>
             </div>
-          </div>
+          </FadeIn>
         </div>
       </footer>
     </div>
@@ -447,6 +384,161 @@ function MarqueeSection() {
   );
 }
 
+// Sub-component: Factory Videos (cinematic featured + secondary list)
+const FACTORY_VIDEOS = [
+  {
+    title: "Paper cup printing process at the factory",
+    meta: "2-layer PE cold-drink cup production",
+    ytId: "8Z2tkkSgoE4",
+    duration: "2:30",
+  },
+  {
+    title: "Brand logo printing on paper cups",
+    meta: "Rotary press color-plate alignment",
+    ytId: "dR6raK9-k0Y",
+    duration: "3:15",
+  },
+  {
+    title: "Hot-water-resistant paper bowl production",
+    meta: "High-tech automatic heat-sealed base",
+    ytId: "TDaCUSKEEuk",
+    duration: "1:45",
+  },
+];
+
+const ytThumb = (id: string) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+const openVideo = (id: string) => window.open(`https://www.youtube.com/watch?v=${id}`, "_blank");
+
+function PlayBadge({ size }: { size: "lg" | "sm" }) {
+  const dim = size === "lg" ? "w-16 h-16 sm:w-20 sm:h-20" : "w-10 h-10";
+  const icon = size === "lg" ? "w-7 h-7 sm:w-8 sm:h-8" : "w-4 h-4";
+  return (
+    <span
+      className={`absolute left-1/2 top-1/2 z-10 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/40 bg-white/15 backdrop-blur-md transition-all duration-300 group-hover:scale-110 group-hover:border-[#C9A961] group-hover:bg-[#C9A961]/30 ${dim}`}
+      style={{ boxShadow: "0 8px 30px rgba(0,0,0,0.35)" }}
+    >
+      <Play className={`${icon} ml-0.5 fill-white text-white`} />
+    </span>
+  );
+}
+
+function FactoryVideos() {
+  const [featured, ...rest] = FACTORY_VIDEOS;
+
+  return (
+    <section
+      id="videos"
+      className="bg-background transition-colors duration-300 py-24 px-5 sm:px-8 md:px-10 border-t border-foreground/10 relative z-10"
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Heading */}
+        <FadeIn delay={0} y={30}>
+          <div className="text-center mb-12 md:mb-14">
+            <span className="text-[11px] font-semibold tracking-[0.2em] text-[#1F6E4E] uppercase mb-3 inline-flex items-center gap-3">
+              <span className="h-px w-6" style={{ background: GOLD }} />
+              REAL PRODUCTION PROCESS
+              <span className="h-px w-6" style={{ background: GOLD }} />
+            </span>
+            <h2
+              className="hero-heading font-black uppercase text-center mb-4"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)" }}
+            >
+              Factory Videos
+            </h2>
+            <p className="text-foreground/60 max-w-lg mx-auto text-sm leading-relaxed font-light">
+              Explore our closed-loop, fully automated printing process that meets food-safety and
+              hygiene standards.
+            </p>
+          </div>
+        </FadeIn>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
+          {/* Featured video */}
+          <FadeIn delay={0} y={35} className="lg:col-span-7">
+            <button
+              type="button"
+              onClick={() => openVideo(featured.ytId)}
+              className="group relative block w-full overflow-hidden rounded-[28px] border border-white/70 cursor-pointer text-left h-[280px] sm:h-[380px] lg:h-[460px] shadow-[0_30px_60px_rgba(31,110,78,0.12)]"
+            >
+              <img
+                src={ytThumb(featured.ytId)}
+                alt={featured.title}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/5" />
+
+              <div className="absolute top-5 left-5 right-5 flex items-center justify-between">
+                <span
+                  className="text-[10px] font-black tracking-[0.2em] px-3 py-1.5 rounded-full"
+                  style={{ color: "#0B100D", background: GOLD }}
+                >
+                  EP. 01
+                </span>
+                <span className="text-[11px] font-bold text-white/90 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full">
+                  {featured.duration}
+                </span>
+              </div>
+
+              <PlayBadge size="lg" />
+
+              <div className="absolute inset-x-0 bottom-0 p-6 sm:p-7">
+                <span
+                  className="text-[11px] font-bold uppercase tracking-widest"
+                  style={{ color: GOLD }}
+                >
+                  {featured.meta}
+                </span>
+                <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white mt-1.5 leading-tight">
+                  {featured.title}
+                </h3>
+              </div>
+            </button>
+          </FadeIn>
+
+          {/* Secondary list */}
+          <FadeIn delay={0.15} y={35} className="lg:col-span-5">
+            <div className="flex flex-col gap-5 h-full lg:h-[460px]">
+              {rest.map((v, i) => (
+                <button
+                  key={v.ytId}
+                  type="button"
+                  onClick={() => openVideo(v.ytId)}
+                  className="group relative flex gap-4 w-full flex-1 min-h-[110px] text-left rounded-2xl overflow-hidden border border-white/70 bg-white/60 backdrop-blur-md p-2.5 hover:border-[#C9A961]/50 transition-all duration-300 cursor-pointer shadow-[0_8px_24px_rgba(31,110,78,0.05)]"
+                >
+                  <div className="relative w-32 lg:w-40 shrink-0 self-stretch rounded-xl overflow-hidden">
+                    <img
+                      src={ytThumb(v.ytId)}
+                      alt={v.title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-black/25 group-hover:bg-black/10 transition-colors" />
+                    <PlayBadge size="sm" />
+                    <span className="absolute bottom-1.5 right-1.5 text-[9px] font-bold text-white bg-black/55 px-1.5 py-0.5 rounded">
+                      {v.duration}
+                    </span>
+                  </div>
+                  <div className="flex-1 min-w-0 flex flex-col justify-center py-1 pr-1">
+                    <span
+                      className="text-[9px] font-black uppercase tracking-widest"
+                      style={{ color: GOLD }}
+                    >
+                      EP. 0{i + 2}
+                    </span>
+                    <h3 className="text-sm font-bold text-foreground line-clamp-2 mt-1 leading-snug">
+                      {v.title}
+                    </h3>
+                    <p className="text-xs text-foreground/50 mt-1 line-clamp-1">{v.meta}</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Sub-component: Stacking Project Card
 interface ProjectCardProps {
   project: (typeof projectsData)[number];
@@ -470,7 +562,9 @@ function ProjectCard({ project, index, totalCards, isMobile }: ProjectCardProps)
   return (
     <div
       ref={containerRef}
-      className="h-auto md:h-[120vh] w-full flex flex-col justify-start md:sticky relative"
+      className={`${
+        index === totalCards - 1 ? "h-auto" : "h-auto md:h-[120vh]"
+      } w-full flex flex-col justify-start md:sticky relative`}
       style={{
         zIndex: index + 1,
         top: isMobile ? "auto" : `calc(6rem + ${index * 28}px)`,
@@ -480,10 +574,10 @@ function ProjectCard({ project, index, totalCards, isMobile }: ProjectCardProps)
         style={{
           scale: isMobile ? 1 : scale,
         }}
-        className="relative w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 dark:border-[#9CE3C6]/60 border-[#1F6E4E]/30 bg-background text-foreground transition-colors duration-300 p-4 sm:p-6 md:p-8 flex flex-col justify-between"
+        className="relative w-full rounded-[40px] sm:rounded-[50px] md:rounded-[60px] border-2 border-[#1F6E4E]/30 bg-background text-foreground transition-colors duration-300 p-4 sm:p-6 md:p-8 flex flex-col justify-between"
       >
         {/* Card Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b dark:border-[#D2E4DC]/15 border-foreground/10 pb-6 mb-6">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-foreground/10 pb-6 mb-6">
           <div className="flex items-center gap-4 sm:gap-6">
             <span
               className="font-black text-foreground leading-none shrink-0"

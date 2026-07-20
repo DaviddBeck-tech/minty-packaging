@@ -1,8 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -28,9 +26,14 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-mint-accent: #9CE3C6;
-  --color-sage-muted: #D2E4DC;
-  --color-sage-dark: #1F6E4E;
+  /* Brand palette — Emerald (primary) · Lime (fresh highlight) · Gold (premium accent) */
+  --color-emerald: #1f6e4e;
+  --color-emerald-deep: #0d3a2b;
+  --color-lime-accent: #9aca3c;
+  --color-mint-accent: #9aca3c;
+  --color-gold: #c9a961;
+  --color-sage-muted: #d2e4dc;
+  --color-sage-dark: #1f6e4e;
   --color-teal-50: #f0fdfa;
   --color-teal-100: #ccfbf1;
   --color-teal-500: #14b8a6;
@@ -51,13 +54,9 @@
 
 :root {
   --radius: 0.75rem;
-  --background: #F5FAF7;
-  --foreground: #0B100D;
-}
-
-.dark {
-  --background: #0B100D;
-  --foreground: #D2E4DC;
+  /* Soft, airy mint-white canvas with a deep forest-ink for text */
+  --background: #f4f9f6;
+  --foreground: #102018;
 }
 
 @layer base {
@@ -65,8 +64,8 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    border-color: rgba(210, 228, 220, 0.15);
-    transition: background-color 300ms ease, border-color 300ms ease;
+    /* Soft emerald-tinted default border — cleaner than near-invisible grey on white */
+    border-color: rgba(31, 110, 78, 0.12);
   }
   html,
   body,
@@ -75,7 +74,6 @@
     color: var(--foreground);
     font-family: var(--font-sans), sans-serif;
     scroll-behavior: smooth;
-    transition: background-color 300ms ease, color 300ms ease;
   }
   ::-webkit-scrollbar {
     width: 6px;
@@ -83,28 +81,17 @@
   }
   ::-webkit-scrollbar-track {
     background: var(--background);
-    transition: background-color 300ms ease;
   }
   ::-webkit-scrollbar-thumb {
-    background: #1F6E4E;
+    background: #1f6e4e;
     border-radius: 3px;
-  }
-  .dark ::-webkit-scrollbar-thumb {
-    background: #6DBB9A;
   }
 }
 
 @layer utilities {
   .hero-heading {
-    background-image: linear-gradient(135deg, #0D3A2B 0%, #1F6E4E 65%, #38B27E 100%);
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-    color: transparent !important;
-    transition: none !important;
-  }
-  .dark .hero-heading {
-    background-image: linear-gradient(180deg, #D2E4DC 0%, #9CE3C6 100%);
+    /* Deep emerald → fresh lime for a premium, brand-tied gradient */
+    background-image: linear-gradient(120deg, #0d3a2b 0%, #1f6e4e 55%, #6ba83c 100%);
     -webkit-background-clip: text !important;
     -webkit-text-fill-color: transparent !important;
     background-clip: text !important;

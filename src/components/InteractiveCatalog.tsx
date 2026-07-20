@@ -2,7 +2,20 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Coffee, GlassWater, Soup, Sparkles, CheckCircle2, Info } from "lucide-react";
+import {
+  Coffee,
+  GlassWater,
+  Soup,
+  Sparkles,
+  CheckCircle2,
+  Ruler,
+  Layers,
+  Droplets,
+} from "lucide-react";
+import { FadeIn } from "./FadeIn";
+
+// Premium champagne-gold accent paired with the minty green palette
+const GOLD = "#C9A961";
 
 interface ProductItem {
   id: string;
@@ -14,6 +27,7 @@ interface ProductItem {
   specs: string;
   bestFor: string;
   has3D: boolean;
+  image?: string; // transparent-bg product render shown in the spotlight
 }
 
 const CATALOG_DATA: Record<
@@ -22,174 +36,189 @@ const CATALOG_DATA: Record<
 > = {
   paper_cups: {
     icon: Coffee,
-    label: "Ly Giấy",
+    label: "Paper Cups",
     items: [
       {
         id: "pc-1",
-        name: "Ly giấy Sampling 4.5oz",
+        name: "Paper Cup Sampling 4.5oz",
         capacity: "135ml",
-        moq: "2.000 cái",
-        usage: "Thử sản phẩm mới, uống nước văn phòng, nha khoa.",
-        materials: "Giấy PO tinh khiết 190gsm + 1 lớp PE chống thấm",
-        specs: "Miệng: 60mm · Đáy: 45mm · Cao: 62mm",
-        bestFor: "Sampling nước, cafe dùng thử",
+        moq: "2,000 pcs",
+        usage: "Product sampling, office drinking water, dental clinics.",
+        materials: "Pure PO paper 190gsm + 1 PE waterproof layer",
+        specs: "Rim: 60mm · Base: 45mm · Height: 62mm",
+        bestFor: "Water sampling, coffee tasting",
         has3D: true,
+        image: "/cups/miaoi.png",
       },
       {
         id: "pc-2",
-        name: "Ly giấy Văn Phòng 7oz",
+        name: "Paper Cup Office 7oz",
         capacity: "210ml",
-        moq: "1.000 cái",
-        usage: "Sử dụng tại văn phòng, ngân hàng, sự kiện, trường học.",
-        materials: "Giấy PO tinh khiết 210gsm + 1 lớp PE chống thấm",
-        specs: "Miệng: 70mm · Đáy: 52mm · Cao: 78mm",
-        bestFor: "Nước nóng/lạnh uống nhanh",
+        moq: "1,000 pcs",
+        usage: "For offices, banks, events and schools.",
+        materials: "Pure PO paper 210gsm + 1 PE waterproof layer",
+        specs: "Rim: 70mm · Base: 52mm · Height: 78mm",
+        bestFor: "Quick hot/cold drinks",
         has3D: true,
+        image: "/cups/mio.png",
       },
       {
         id: "pc-3",
-        name: "Ly giấy Cafe/Trà 9oz",
+        name: "Paper Cup Coffee/Tea 9oz",
         capacity: "270ml",
-        moq: "1.000 cái",
-        usage: "Đựng cafe nóng, trà nóng, cacao nóng, cappuccino.",
-        materials: "Giấy PO 230gsm + 1 lớp PE (Có tùy chọn Kraft 2 lớp cách nhiệt)",
-        specs: "Miệng: 75mm · Đáy: 53mm · Cao: 90mm",
-        bestFor: "Espresso, Americano, Cafe Nóng",
+        moq: "1,000 pcs",
+        usage: "Hot coffee, hot tea, hot cocoa, cappuccino.",
+        materials: "PO paper 230gsm + 1 PE layer (optional 2-layer Kraft insulation)",
+        specs: "Rim: 75mm · Base: 53mm · Height: 90mm",
+        bestFor: "Espresso, Americano, hot coffee",
         has3D: true,
+        image: "/cups/no6.png",
       },
       {
         id: "pc-4",
-        name: "Ly giấy Medium 12oz",
+        name: "Paper Cup Medium 12oz",
         capacity: "360ml",
-        moq: "1.000 cái",
-        usage: "Đựng sinh tố cỡ vừa, cafe sữa đá, trà trái cây.",
-        materials: "Giấy PO tinh khiết 280gsm + 2 lớp PE (in lạnh không bị nhũn)",
-        specs: "Miệng: 80mm · Đáy: 53mm · Cao: 115mm",
-        bestFor: "Cafe đá, nước ép, Matcha",
+        moq: "1,000 pcs",
+        usage: "Medium smoothies, iced milk coffee, fruit tea.",
+        materials: "Pure PO paper 280gsm + 2 PE layers (won't soften with cold printing)",
+        specs: "Rim: 80mm · Base: 53mm · Height: 115mm",
+        bestFor: "Iced coffee, juice, matcha",
         has3D: true,
+        image: "/cups/puy.png",
       },
       {
         id: "pc-5",
-        name: "Ly giấy Large 16oz",
+        name: "Paper Cup Large 16oz",
         capacity: "480ml",
-        moq: "1.000 cái",
-        usage: "Phục vụ trà sữa cỡ tiêu chuẩn, nước ép đá, sinh tố.",
-        materials: "Giấy PO tinh khiết 290gsm + 2 lớp PE (chống ngưng tụ nước)",
-        specs: "Miệng: 90mm · Đáy: 60mm · Cao: 127mm",
-        bestFor: "Trà sữa, Hồng trà, Sinh tố lớn",
+        moq: "1,000 pcs",
+        usage: "Standard-size milk tea, iced juice, smoothies.",
+        materials: "Pure PO paper 290gsm + 2 PE layers (anti-condensation)",
+        specs: "Rim: 90mm · Base: 60mm · Height: 127mm",
+        bestFor: "Milk tea, black tea, large smoothies",
         has3D: true,
+        image: "/cups/ohlala.png",
       },
       {
         id: "pc-6",
-        name: "Ly giấy King Size 22oz",
+        name: "Paper Cup King Size 22oz",
         capacity: "700ml",
-        moq: "1.000 cái",
-        usage: "Ly size khổng lồ cho các quán trà tắc, trà trái cây cỡ lớn.",
-        materials: "Giấy PO tinh khiết 300gsm + 2 lớp PE dày dặn",
-        specs: "Miệng: 90mm · Đáy: 62mm · Cao: 155mm",
-        bestFor: "Trà tắc khổng lồ, Trà dâu, Trà vải",
+        moq: "1,000 pcs",
+        usage: "Giant-size cup for large kumquat tea and fruit tea shops.",
+        materials: "Pure PO paper 300gsm + 2 thick PE layers",
+        specs: "Rim: 90mm · Base: 62mm · Height: 155mm",
+        bestFor: "Giant kumquat tea, strawberry tea, lychee tea",
         has3D: true,
+        image: "/cups/goodtea.png",
       },
     ],
   },
   plastic_cups: {
     icon: GlassWater,
-    label: "Ly Nhựa",
+    label: "Plastic Cups",
     items: [
       {
         id: "pl-1",
-        name: "Ly nhựa PET 360ml",
+        name: "PET Plastic Cup 360ml",
         capacity: "360ml",
-        moq: "1.000 cái",
-        usage: "Đựng cafe đá, nước trái cây có màu sắc đẹp mắt. Dùng nắp cầu hoặc nắp bằng.",
-        materials: "Nhựa PET nguyên sinh, siêu trong suốt, cứng cáp (Không ép màng được)",
-        specs: "Miệng: 93mm · Đáy: 55mm · Cao: 108mm",
-        bestFor: "Cafe phin đá, Cafe Highland style",
+        moq: "1,000 pcs",
+        usage: "For iced coffee and colorful fruit juices. Use dome or flat lids.",
+        materials: "Virgin PET plastic, ultra-clear and rigid (cannot be film-sealed)",
+        specs: "Rim: 93mm · Base: 55mm · Height: 108mm",
+        bestFor: "Iced phin coffee, Highland-style coffee",
         has3D: false,
       },
       {
         id: "pl-2",
-        name: "Ly nhựa PET 500ml",
+        name: "PET Plastic Cup 500ml",
         capacity: "500ml",
-        moq: "1.000 cái",
-        usage: "Thích hợp cho các món đá xay nghệ thuật, trà trái cây cao cấp.",
-        materials: "Nhựa PET nguyên sinh dày dặn, chịu lực tốt",
-        specs: "Miệng: 98mm · Đáy: 58mm · Cao: 122mm",
-        bestFor: "Matcha đá xay, Sinh tố hoa quả",
+        moq: "1,000 pcs",
+        usage: "Great for artistic blended-ice drinks and premium fruit teas.",
+        materials: "Thick virgin PET plastic, strong and durable",
+        specs: "Rim: 98mm · Base: 58mm · Height: 122mm",
+        bestFor: "Blended matcha, fruit smoothies",
         has3D: true,
       },
       {
         id: "pl-3",
-        name: "Ly nhựa PP 500ml",
+        name: "PP Plastic Cup 500ml",
         capacity: "500ml",
-        moq: "1.000 cái",
-        usage: "Ly trà sữa phổ thông, có thể ép màng nhựa nắp kín để ship đi xa.",
-        materials: "Nhựa PP dẻo, hơi mờ đục, chịu nhiệt ấm tốt (Ép màng nắp thoải mái)",
-        specs: "Miệng: 95mm · Đáy: 56mm · Cao: 128mm",
-        bestFor: "Trà sữa truyền thống ép màng nắp",
+        moq: "1,000 pcs",
+        usage: "Standard milk tea cup; can be film-sealed for long-distance shipping.",
+        materials: "Flexible PP plastic, slightly opaque, warm-heat resistant (easy to film-seal)",
+        specs: "Rim: 95mm · Base: 56mm · Height: 128mm",
+        bestFor: "Traditional film-sealed milk tea",
         has3D: false,
       },
       {
         id: "pl-4",
-        name: "Ly nhựa Đáy Bầu 500ml",
+        name: "Round-Bottom Plastic Cup 500ml",
         capacity: "500ml",
-        moq: "1.000 cái",
-        usage: "Tạo hình mập tròn cực kỳ đáng yêu, rất thu hút các bạn trẻ.",
-        materials: "Nhựa PP dẻo chất lượng cao, nắp cầu hoặc nắp tim",
-        specs: "Miệng: 95mm · Đáy: Cầu vồng · Cao: 110mm",
-        bestFor: "Sữa tươi trân châu đường đen",
+        moq: "1,000 pcs",
+        usage: "Adorable chubby round shape, very appealing to young customers.",
+        materials: "High-quality flexible PP plastic, dome or heart lid",
+        specs: "Rim: 95mm · Base: Rounded · Height: 110mm",
+        bestFor: "Fresh milk with brown sugar boba",
         has3D: true,
       },
     ],
   },
   paper_bowls: {
     icon: Soup,
-    label: "Tô Giấy",
+    label: "Paper Bowls",
     items: [
       {
         id: "pb-1",
-        name: "Tô giấy ăn kem 6oz",
+        name: "Ice Cream Paper Bowl 6oz",
         capacity: "180ml",
-        moq: "1.000 cái",
-        usage: "Đựng kem viên, sữa chua dẻo, trái cây tô mini.",
-        materials: "Giấy PO tinh khiết 240gsm + 1 lớp PE chống thấm",
-        specs: "Miệng: 85mm · Đáy: 70mm · Cao: 48mm",
-        bestFor: "Ice Cream, Yogurt",
+        moq: "1,000 pcs",
+        usage: "For ice cream scoops, soft yogurt, mini fruit bowls.",
+        materials: "Pure PO paper 240gsm + 1 PE waterproof layer",
+        specs: "Rim: 85mm · Base: 70mm · Height: 48mm",
+        bestFor: "Ice cream, yogurt",
         has3D: true,
       },
       {
         id: "pb-2",
-        name: "Tô giấy nhỏ 12oz",
+        name: "Small Paper Bowl 12oz",
         capacity: "360ml",
-        moq: "1.000 cái",
-        usage: "Đựng soup cua, cháo dinh dưỡng cho bé mang đi.",
-        materials: "Giấy PO tinh khiết 280gsm + 2 lớp PE chịu nhiệt nóng",
-        specs: "Miệng: 100mm · Đáy: 80mm · Cao: 75mm",
-        bestFor: "Soup cua, cháo nóng, bánh bông lan",
+        moq: "1,000 pcs",
+        usage: "For crab soup and nutritious porridge to-go for kids.",
+        materials: "Pure PO paper 280gsm + 2 heat-resistant PE layers",
+        specs: "Rim: 100mm · Base: 80mm · Height: 75mm",
+        bestFor: "Crab soup, hot porridge, sponge cake",
         has3D: false,
       },
       {
         id: "pb-3",
-        name: "Tô giấy phở/soup 25oz",
+        name: "Pho/Soup Paper Bowl 25oz",
         capacity: "750ml",
-        moq: "1.000 cái",
-        usage: "Đựng phở, bún bò, hủ tiếu mang về. Có nắp đậy khít chống tràn dầu.",
-        materials: "Giấy PO cao cấp 320gsm + 2 lớp PE siêu dày cách nhiệt",
-        specs: "Miệng: 142mm · Đáy: 112mm · Cao: 78mm",
-        bestFor: "Bún bò, Hủ tiếu mang đi",
+        moq: "1,000 pcs",
+        usage: "For pho, beef noodle soup and hu tieu to-go. Tight lid prevents oil spills.",
+        materials: "Premium PO paper 320gsm + 2 extra-thick insulating PE layers",
+        specs: "Rim: 142mm · Base: 112mm · Height: 78mm",
+        bestFor: "Beef noodle soup, hu tieu to-go",
         has3D: true,
       },
     ],
   },
 };
 
+const parseMl = (capacity: string) => parseInt(capacity.replace(/[^0-9]/g, ""), 10) || 0;
+
 export function InteractiveCatalog() {
   const [activeTab, setActiveTab] = useState<keyof typeof CATALOG_DATA>("paper_cups");
-  const [selectedItem, setSelectedItem] = useState<ProductItem>(CATALOG_DATA.paper_cups.items[2]); // Default 9oz
+  const [selectedId, setSelectedId] = useState<string>(CATALOG_DATA.paper_cups.items[2].id);
+
+  const items = CATALOG_DATA[activeTab].items;
+  const selectedItem = items.find((i) => i.id === selectedId) ?? items[0];
+  const ActiveIcon = CATALOG_DATA[activeTab].icon;
+
+  const maxCap = Math.max(...items.map((i) => parseMl(i.capacity)));
+  const fillPct = Math.round((parseMl(selectedItem.capacity) / maxCap) * 100);
 
   const handleTabChange = (tab: keyof typeof CATALOG_DATA) => {
     setActiveTab(tab);
-    setSelectedItem(CATALOG_DATA[tab].items[0]);
+    setSelectedId(CATALOG_DATA[tab].items[0].id);
   };
 
   return (
@@ -197,162 +226,296 @@ export function InteractiveCatalog() {
       id="catalog"
       className="py-24 px-5 sm:px-8 md:px-10 max-w-7xl mx-auto flex flex-col justify-start relative select-none text-left"
     >
-      <div className="mb-12 md:mb-16">
-        <div className="text-[11px] font-semibold tracking-[0.2em] dark:text-[#9CE3C6] text-[#1F6E4E] uppercase mb-3 flex items-center gap-2">
-          <Sparkles size={14} className="animate-pulse" />
-          DANH MỤC KHÁCH HÀNG THƯỜNG DÙNG
+      {/* Section heading */}
+      <FadeIn delay={0} y={30}>
+        <div className="mb-10 md:mb-14">
+          <div className="text-[11px] font-semibold tracking-[0.2em] text-[#1F6E4E] uppercase mb-3 flex items-center gap-2">
+            <Sparkles size={14} className="animate-pulse" />
+            POPULAR CUSTOMER CATEGORIES
+          </div>
+          <h2
+            className="hero-heading font-black uppercase leading-none tracking-tight mb-4"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
+            Products & Specifications
+          </h2>
+          <p className="text-foreground/70 transition-colors duration-300 max-w-2xl text-sm sm:text-base leading-relaxed">
+            Quickly look up capacity (oz / ml), our factory&apos;s standard technical specs, and the
+            premium bio-based materials that elevate your F&B brand.
+          </p>
         </div>
-        <h2
-          className="hero-heading font-black uppercase leading-none tracking-tight mb-4"
-          style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
-        >
-          Sản Phẩm & Quy Cách
-        </h2>
-        <p className="text-foreground/70 transition-colors duration-300 max-w-2xl text-sm sm:text-base leading-relaxed">
-          Tra cứu nhanh dung tích (oz / ml), thông số kỹ thuật chuẩn của xưởng in và các chất liệu
-          sinh học cao cấp giúp nâng tầm thương hiệu F&B của bạn.
-        </p>
-      </div>
+      </FadeIn>
 
-      {/* Tab bar switcher */}
-      <div className="flex gap-3 mb-10 overflow-x-auto pb-2 scrollbar-none">
-        {(Object.keys(CATALOG_DATA) as Array<keyof typeof CATALOG_DATA>).map((key) => {
-          const TabIcon = CATALOG_DATA[key].icon;
-          const isActive = activeTab === key;
-          return (
-            <button
-              key={key}
-              onClick={() => handleTabChange(key)}
-              className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 cursor-pointer border ${
-                isActive
-                  ? "dark:bg-[#9CE3C6] dark:text-[#0B100D] dark:border-[#9CE3C6] bg-gradient-to-br from-[#EAF7F2] to-[#D2E4DC]/70 border-[#1F6E4E]/30 text-[#1F6E4E] shadow-[0px_4px_12px_rgba(31,110,78,0.08),_inset_0px_1px_2px_rgba(255,255,255,0.8)]"
-                  : "dark:bg-[#0B100D]/40 dark:text-[#D2E4DC]/60 dark:border-[#D2E4DC]/15 bg-white/40 border-white/60 text-foreground/60 hover:border-[#1F6E4E]/30 dark:hover:border-[#9CE3C6]/40 hover:text-[#1F6E4E] dark:hover:text-[#D2E4DC] shadow-sm dark:shadow-none backdrop-blur-md"
-              }`}
-            >
-              <TabIcon size={16} />
-              <span>{CATALOG_DATA[key].label}</span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Main interactive grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Side: Cards grid */}
-        <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {CATALOG_DATA[activeTab].items.map((item) => {
-            const isSelected = selectedItem.id === item.id;
+      {/* Tab switcher */}
+      <FadeIn delay={0.1} y={20}>
+        <div className="flex gap-3 mb-8 overflow-x-auto pb-2 scrollbar-none">
+          {(Object.keys(CATALOG_DATA) as Array<keyof typeof CATALOG_DATA>).map((key) => {
+            const TabIcon = CATALOG_DATA[key].icon;
+            const isActive = activeTab === key;
             return (
-              <motion.div
-                key={item.id}
-                onClick={() => setSelectedItem(item)}
-                whileHover={{ y: -4 }}
-                className={`p-5 rounded-2xl border cursor-pointer transition-all duration-300 relative ${
-                  isSelected
-                    ? "dark:border-[#9CE3C6] border-[#1F6E4E] dark:bg-gradient-to-br dark:from-[#0D221A] dark:to-[#0B100D] bg-gradient-to-br from-[#EAF7F2]/90 to-white/95 shadow-[0_12px_30px_rgba(31,110,78,0.08),_inset_0_1px_3px_white] dark:shadow-[0px_8px_32px_rgba(156,227,198,0.06)]"
-                    : "dark:border-[#D2E4DC]/10 border-white/60 dark:bg-[#0B100D]/40 bg-white/40 backdrop-blur-md hover:border-[#1F6E4E]/30 dark:hover:border-[#9CE3C6]/30 shadow-[0_4px_16px_rgba(31,110,78,0.03),_inset_0_1px_2px_white] hover:bg-white/65 hover:shadow-[0_8px_20px_rgba(31,110,78,0.06)] dark:shadow-none"
+              <button
+                key={key}
+                type="button"
+                onClick={() => handleTabChange(key)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold uppercase tracking-wider transition-all duration-300 shrink-0 cursor-pointer border ${
+                  isActive
+                    ? " bg-gradient-to-br from-[#EAF7F2] to-[#D2E4DC]/70 border-[#1F6E4E]/30 text-[#1F6E4E] shadow-[0px_4px_12px_rgba(31,110,78,0.08),_inset_0px_1px_2px_rgba(255,255,255,0.8)]"
+                    : " bg-white/40 border-white/60 text-foreground/60 hover:border-[#1F6E4E]/30 hover:text-[#1F6E4E] shadow-sm backdrop-blur-md"
                 }`}
               >
-                {item.has3D && (
-                  <span className="absolute top-4 right-4 dark:bg-[#9CE3C6]/10 bg-[#1F6E4E]/10 dark:text-[#9CE3C6] text-[#1F6E4E] text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1">
-                    <Sparkles size={8} /> 3D Mockup
-                  </span>
-                )}
-                <span className="text-xs dark:text-[#9CE3C6] text-[#1F6E4E] font-bold uppercase tracking-widest block mb-1">
-                  {item.capacity}
-                </span>
-                <h3 className="text-base font-bold text-foreground tracking-wide mb-2">
-                  {item.name}
-                </h3>
-                <p className="text-xs text-foreground/50 line-clamp-2 leading-relaxed">
-                  {item.usage}
-                </p>
-              </motion.div>
+                <TabIcon size={16} />
+                <span>{CATALOG_DATA[key].label}</span>
+              </button>
             );
           })}
         </div>
+      </FadeIn>
 
-        {/* Right Side: Detailed glassmorphism panel */}
-        <div className="lg:col-span-5">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={selectedItem.id}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="p-6 rounded-[32px] border dark:border-[#D2E4DC]/15 border-white/80 dark:bg-gradient-to-br dark:from-[#0B100D] dark:via-[#0E1511] dark:to-[#0B100D] bg-white/60 relative overflow-hidden backdrop-blur-lg shadow-[0_20px_50px_rgba(31,110,78,0.06),_inset_0_1px_3px_white]"
-            >
-              {/* Decorative gradient blur inside card */}
-              <div className="absolute -top-12 -right-12 w-32 h-32 rounded-full bg-[#9CE3C6] dark:opacity-[0.03] opacity-[0.05] blur-3xl pointer-events-none" />
+      {/* Configurator: rail · specs · spotlight */}
+      <FadeIn delay={0.2} y={30}>
+        <div className="relative rounded-[36px] border border-white/80 bg-white/55 backdrop-blur-xl shadow-[0_30px_70px_rgba(31,110,78,0.10),_inset_0_1px_4px_white] overflow-hidden">
+          {/* Grain texture */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.04] mix-blend-overlay">
+            <svg className="w-full h-full">
+              <filter id="catalog-grain">
+                <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" />
+              </filter>
+              <rect width="100%" height="100%" filter="url(#catalog-grain)" />
+            </svg>
+          </div>
 
-              <h4 className="text-xs uppercase tracking-widest dark:text-[#9CE3C6] text-[#1F6E4E] font-bold mb-1">
-                Chi Tiết Quy Cách
-              </h4>
-              <h3 className="text-2xl font-black text-foreground mb-4 uppercase tracking-wide">
-                {selectedItem.name}
-              </h3>
+          <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-0">
+            {/* ── LEFT: Size rail ── */}
+            <div className="lg:col-span-3 order-2 lg:order-1 p-5 sm:p-6 lg:border-r border-foreground/[0.06]">
+              <span className="text-[10px] uppercase tracking-[0.2em] text-foreground/40 font-bold block mb-4 px-1">
+                Select capacity
+              </span>
+              <div className="flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible scrollbar-none pb-1 lg:pb-0">
+                {items.map((item) => {
+                  const isSel = item.id === selectedItem.id;
+                  return (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setSelectedId(item.id)}
+                      className={`group shrink-0 lg:w-full text-left rounded-2xl pl-3 pr-4 py-3 flex items-center gap-3 border transition-all duration-300 cursor-pointer ${
+                        isSel
+                          ? " border-[#1F6E4E]/25 bg-gradient-to-br from-[#EAF7F2]/90 to-white/80 shadow-[0_8px_24px_rgba(31,110,78,0.08),_inset_0_1px_2px_white]"
+                          : "border-transparent hover: hover:bg-[#1F6E4E]/[0.04]"
+                      }`}
+                    >
+                      {/* accent bar */}
+                      <span
+                        className="w-[3px] h-9 rounded-full transition-all duration-300 shrink-0"
+                        style={{
+                          background: isSel ? `linear-gradient(#9ACA3C, #1F6E4E)` : "transparent",
+                        }}
+                      />
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-baseline gap-1">
+                          <span
+                            className={`text-lg font-black leading-none ${
+                              isSel ? " text-[#1F6E4E]" : "text-foreground/75"
+                            }`}
+                          >
+                            {parseMl(item.capacity)}
+                          </span>
+                          <span className="text-[10px] font-bold text-foreground/40">ml</span>
+                        </div>
+                        <div className="text-[11px] text-foreground/55 truncate mt-0.5 hidden lg:block">
+                          {item.name}
+                        </div>
+                      </div>
+                      {item.has3D && (
+                        <Sparkles
+                          size={12}
+                          className={`shrink-0 transition-opacity ${isSel ? "opacity-100" : "opacity-0 group-hover:opacity-60"}`}
+                          style={{ color: GOLD }}
+                        />
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
 
-              <div className="space-y-4 text-sm mb-6 border-b dark:border-[#D2E4DC]/10 border-foreground/10 pb-6">
-                <div>
-                  <span className="text-xs text-foreground/40 uppercase tracking-wider block mb-1">
-                    Dung tích khả dụng
-                  </span>
-                  <p className="font-bold dark:text-[#9CE3C6] text-[#1F6E4E] text-lg flex items-center gap-2">
-                    {selectedItem.capacity}
-                  </p>
-                </div>
+            {/* ── MIDDLE: Specs ── */}
+            <div className="lg:col-span-4 order-3 lg:order-2 p-6 sm:p-8 flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedItem.id}
+                  initial={{ opacity: 0, y: 14 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span
+                      className="text-[10px] uppercase tracking-[0.2em] font-bold"
+                      style={{ color: GOLD }}
+                    >
+                      Specifications
+                    </span>
+                    {selectedItem.has3D && (
+                      <span
+                        className="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full flex items-center gap-1"
+                        style={{ color: GOLD, background: `${GOLD}1A` }}
+                      >
+                        <Sparkles size={8} /> 3D Mockup
+                      </span>
+                    )}
+                  </div>
 
-                <div>
-                  <span className="text-xs text-foreground/40 uppercase tracking-wider block mb-1">
-                    Kích thước chuẩn (Miệng x Đáy x Cao)
-                  </span>
-                  <p className="text-foreground font-medium">{selectedItem.specs}</p>
-                </div>
+                  <h3 className="text-2xl sm:text-3xl font-black text-foreground uppercase tracking-tight leading-tight mb-5">
+                    {selectedItem.name}
+                  </h3>
 
-                <div>
-                  <span className="text-xs text-foreground/40 uppercase tracking-wider block mb-1">
-                    Vật liệu và định lượng
-                  </span>
-                  <p className="text-foreground/80 font-light leading-relaxed">
-                    {selectedItem.materials}
-                  </p>
-                </div>
-
-                <div>
-                  <span className="text-xs text-foreground/40 uppercase tracking-wider block mb-1">
-                    Dành cho đồ uống / Phù hợp nhất
-                  </span>
-                  <p className="text-foreground/80 font-light leading-relaxed">
-                    {selectedItem.bestFor}
-                  </p>
-                </div>
-
-                <div className="flex justify-between items-center gap-4 dark:bg-[#0A2218]/40 bg-[#EAF7F2]/60 border dark:border-[#9CE3C6]/15 border-[#1F6E4E]/15 rounded-xl p-3 mt-4">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 size={16} className="dark:text-[#9CE3C6] text-[#1F6E4E]" />
-                    <span className="text-xs text-foreground/80 font-medium">
-                      Đặt in tối thiểu (MOQ)
+                  {/* Capacity hero + visualizer */}
+                  <div className="mb-6">
+                    <div className="flex items-baseline gap-2">
+                      <span
+                        className="font-black leading-none bg-clip-text text-transparent"
+                        style={{
+                          fontSize: "clamp(2.5rem, 6vw, 3.75rem)",
+                          backgroundImage: `linear-gradient(120deg, #1F6E4E, ${GOLD})`,
+                        }}
+                      >
+                        {parseMl(selectedItem.capacity)}
+                      </span>
+                      <span className="text-sm font-bold text-foreground/45 uppercase">ml</span>
+                    </div>
+                    <div className="mt-3 h-1.5 w-full rounded-full bg-foreground/[0.07] overflow-hidden">
+                      <motion.div
+                        key={`bar-${selectedItem.id}`}
+                        initial={{ width: 0 }}
+                        animate={{ width: `${fillPct}%` }}
+                        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
+                        className="h-full rounded-full"
+                        style={{ background: `linear-gradient(90deg, #1F6E4E, #9ACA3C)` }}
+                      />
+                    </div>
+                    <span className="text-[10px] text-foreground/35 mt-1.5 block">
+                      Capacity vs. the largest size ({maxCap}ml)
                     </span>
                   </div>
-                  <span className="text-sm font-bold dark:text-[#9CE3C6] text-[#1F6E4E]">
-                    {selectedItem.moq}
-                  </span>
-                </div>
-              </div>
 
-              {/* 3D customize promise */}
-              <div className="flex gap-3 items-start dark:bg-[#0A1713] bg-[#EAF7F2]/30 rounded-2xl p-4 border dark:border-[#9CE3C6]/10 border-[#1F6E4E]/10">
-                <Info size={18} className="dark:text-[#9CE3C6] text-[#1F6E4E] shrink-0 mt-0.5" />
-                <p className="text-xs text-foreground/75 leading-relaxed font-light">
-                  <strong>Xem trước thiết kế 3D:</strong> Xưởng cung cấp mockup 3D xoay 360 độ hoàn
-                  toàn miễn phí khi khách hàng gửi file logo thiết kế.
-                </p>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                  {/* Spec rows */}
+                  <div className="space-y-4 border-t border-foreground/[0.07] pt-5">
+                    <SpecRow
+                      icon={Ruler}
+                      label="Dimensions (Rim × Base × Height)"
+                      value={selectedItem.specs}
+                    />
+                    <SpecRow
+                      icon={Layers}
+                      label="Material & weight"
+                      value={selectedItem.materials}
+                    />
+                    <SpecRow icon={Droplets} label="Best suited for" value={selectedItem.bestFor} />
+                  </div>
+
+                  {/* MOQ */}
+                  <div className="flex justify-between items-center gap-4 bg-[#EAF7F2]/60 border border-[#1F6E4E]/15 rounded-2xl px-4 py-3 mt-6">
+                    <div className="flex items-center gap-2">
+                      <CheckCircle2 size={16} className=" text-[#1F6E4E]" />
+                      <span className="text-xs text-foreground/80 font-medium">
+                        Minimum order (MOQ)
+                      </span>
+                    </div>
+                    <span className="text-sm font-black text-[#1F6E4E]">{selectedItem.moq}</span>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* ── RIGHT: Spotlight product ── */}
+            <div className="lg:col-span-5 order-1 lg:order-3 relative min-h-[340px] sm:min-h-[420px] lg:min-h-[560px] flex items-center justify-center p-6 overflow-hidden bg-gradient-to-br from-[#F4FAF7] to-[#EAF3EE]/40">
+              {/* radial glows */}
+              <div
+                className="absolute w-[60%] h-[60%] rounded-full blur-[90px] opacity-60"
+                style={{ background: `radial-gradient(circle, #1F6E4E55, transparent 70%)` }}
+              />
+              <div
+                className="absolute bottom-[14%] w-[45%] h-[35%] rounded-full blur-[70px] opacity-40"
+                style={{ background: `radial-gradient(circle, ${GOLD}55, transparent 70%)` }}
+              />
+
+              {/* giant ghost capacity number */}
+              <span
+                className="absolute font-black pointer-events-none select-none leading-none text-[#1F6E4E]/[0.05]"
+                style={{ fontSize: "clamp(140px, 22vw, 300px)", top: "6%" }}
+              >
+                {parseMl(selectedItem.capacity)}
+              </span>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedItem.id}
+                  initial={{ opacity: 0, scale: 0.9, y: 24 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94, y: -16 }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="relative z-10 h-[260px] sm:h-[340px] lg:h-[440px] flex items-end justify-center"
+                >
+                  {selectedItem.image ? (
+                    <motion.img
+                      src={selectedItem.image}
+                      alt={selectedItem.name}
+                      draggable={false}
+                      animate={{ y: [0, -14, 0] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                      className="h-full w-auto object-contain"
+                      style={{ filter: "drop-shadow(0 30px 35px rgba(0,0,0,0.28))" }}
+                    />
+                  ) : (
+                    // Graceful fallback when a product render isn't available yet
+                    <motion.div
+                      animate={{ y: [0, -12, 0] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                      className="flex flex-col items-center justify-center gap-4"
+                    >
+                      <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full flex items-center justify-center bg-[#1F6E4E]/[0.06] border border-[#1F6E4E]/15 backdrop-blur-sm">
+                        <ActiveIcon className=" text-[#1F6E4E]" size={64} strokeWidth={1.25} />
+                      </div>
+                      <span className="text-[10px] uppercase tracking-widest text-foreground/35 font-bold">
+                        3D render coming soon
+                      </span>
+                    </motion.div>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* reflection floor */}
+              <div className="absolute bottom-[10%] w-[55%] h-3 rounded-[100%] blur-md bg-black/15" />
+            </div>
+          </div>
         </div>
-      </div>
+      </FadeIn>
     </section>
+  );
+}
+
+// Compact spec row with leading icon
+function SpecRow({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ComponentType<any>;
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex gap-3">
+      <div className="shrink-0 w-8 h-8 rounded-lg flex items-center justify-center bg-[#1F6E4E]/[0.06] mt-0.5">
+        <Icon size={15} className=" text-[#1F6E4E]" />
+      </div>
+      <div className="min-w-0">
+        <span className="text-[10px] text-foreground/40 uppercase tracking-wider block mb-0.5">
+          {label}
+        </span>
+        <p className="text-sm text-foreground/85 font-light leading-relaxed">{value}</p>
+      </div>
+    </div>
   );
 }
